@@ -19,17 +19,17 @@
 function _s_woocommerce_setup() {
 	add_theme_support(
 		'woocommerce',
-		array(
+		[
 			'thumbnail_image_width' => 150,
 			'single_image_width'    => 300,
-			'product_grid'          => array(
+			'product_grid'          => [
 				'default_rows'    => 3,
 				'min_rows'        => 1,
 				'default_columns' => 4,
 				'min_columns'     => 1,
 				'max_columns'     => 6,
-			),
-		)
+			],
+		]
 	);
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
@@ -43,7 +43,7 @@ add_action( 'after_setup_theme', '_s_woocommerce_setup' );
  * @return void
  */
 function _s_woocommerce_scripts() {
-	wp_enqueue_style( '_s-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array(), _S_VERSION );
+	wp_enqueue_style( '_s-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', [], _S_VERSION );
 
 	$font_path   = WC()->plugin_url() . '/assets/fonts/';
 	$inline_font = '@font-face {
@@ -91,10 +91,10 @@ add_filter( 'body_class', '_s_woocommerce_active_body_class' );
  * @return array $args related products args.
  */
 function _s_woocommerce_related_products_args( $args ) {
-	$defaults = array(
+	$defaults = [
 		'posts_per_page' => 3,
 		'columns'        => 3,
-	);
+	];
 
 	$args = wp_parse_args( $defaults, $args );
 
@@ -214,9 +214,9 @@ if ( ! function_exists( '_s_woocommerce_header_cart' ) ) {
 			</li>
 			<li>
 				<?php
-				$instance = array(
+				$instance = [
 					'title' => '',
-				);
+				];
 
 				the_widget( 'WC_Widget_Cart', $instance );
 				?>
