@@ -1,11 +1,5 @@
 /*
 Theme Name: _s
-Theme URI: https://www.deliciousmedia.co.uk/
-Author: Delicious Media Limited
-Author URI: https://www.deliciousmedia.co.uk/
-Description: Theme for _s
-Version: 1.0.0
-Text Domain: _s
 */
 
 /*--------------------------------------------------------------
@@ -31,7 +25,8 @@ Text Domain: _s
 # Utilities
 	- Accessibility
 	- Alignments
-
+# Plugins
+  - WooCommerce
 --------------------------------------------------------------*/
 
 // Import variables and mixins.
@@ -76,3 +71,18 @@ Text Domain: _s
 /* Alignments
 --------------------------------------------- */
 @import "utilities/alignments";
+
+/* Alignments
+--------------------------------------------- */
+@import "utilities/alignments";
+
+/*--------------------------------------------------------------
+# Plugins
+--------------------------------------------------------------*/
+
+/* WooCommerce
+--------------------------------------------- */
+// @import "plugins/woocommerce";
+
+
+
