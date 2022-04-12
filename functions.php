@@ -26,10 +26,8 @@ function _s_setup() {
 		* If you're building a theme based on _s, use a find and replace
 		* to change '_s' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( '_s', get_template_directory() . '/languages' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+	load_theme_textdomain( '_s', get_template_directory() . '/languages' );
 
 	/*
 		* Let WordPress manage the document title.
@@ -118,10 +116,13 @@ add_action( 'after_setup_theme', '_s_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function _s_scripts() {
-	wp_enqueue_style( '_s-style', get_stylesheet_uri(), [], _S_VERSION );
+
+	$suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
+
+	wp_enqueue_style( '_s-style', get_stylesheet_directory_uri() . '/assets/css/site.css', [], _S_VERSION );
 	wp_style_add_data( '_s-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( '_s-navigation', get_template_directory_uri() . '/js/navigation.js', [], _S_VERSION, true );
+	wp_enqueue_script( '_s-main', get_template_directory_uri() . '/assets/js/_s.js', [], _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

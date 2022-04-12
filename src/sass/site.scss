@@ -25,7 +25,8 @@ Theme Name: _s
 # Utilities
 	- Accessibility
 	- Alignments
-
+# Plugins
+  - WooCommerce
 --------------------------------------------------------------*/
 
 // Import variables and mixins.
@@ -70,3 +71,18 @@ Theme Name: _s
 /* Alignments
 --------------------------------------------- */
 @import "utilities/alignments";
+
+/* Alignments
+--------------------------------------------- */
+@import "utilities/alignments";
+
+/*--------------------------------------------------------------
+# Plugins
+--------------------------------------------------------------*/
+
+/* WooCommerce
+--------------------------------------------- */
+// @import "plugins/woocommerce";
+
+
+
