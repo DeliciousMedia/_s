@@ -1,56 +1,38 @@
-[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
-
 # DM Base Theme
 
 This is the base WordPress theme we use at [Delicious Media](https://www.deliciousmedia.co.uk/) for most of our projects. It is based on [_s](http://underscores.me/) by Automattic. It's designed to be used in conjunction with [our provisioning script](https://github.com/DeliciousMedia/DM-VVV2-Provision-Basic), but you can rename things manually by following the instructions on the undescores repository.
 
+## Development Notes
 
-Installation
----------------
+This theme uses Gulp (v4) to automate compilation of SASS into CSS, minification of JS/CSS and optimisation of images. It requires NPM & Gulp CLI.
 
-### Requirements
+By default image minification uses `imagemin-mozjpeg` which is lossy set to 90% this should be imperceptible, but if this is unacceptable for a project switch to `jpegtran` which is lossless. This will result in significantly larger files. 
 
-`_s` requires the following dependencies:
+- Source SASS files are in `/content/themes/THEMENAME/src/sass/` and are compiled into `/content/THEMENAME/assets/css/`
+- Source JavaScript are in `/content/themes/THEMENAME/src/js/` and are placed in `/content/themes/THEMENAME/assets/js/`
+- Source images are in `/content/themes/THEMENAME/src/img/` and are placed in `/content/THEMENAME/assets/img/`
 
-- [Node.js](https://nodejs.org/)
-- [Composer](https://getcomposer.org/)
+The gulp tasks will create minified and unminified versions of CSS and JavaScript; by default the minified versions are only used in live, this is controlled by the `WP_DEBUG` constant which you should set to true in local-config.php (this is done automatically set on `DEV` and `STAGE`).
 
-### Quick Start
+To get started, install the required node modules.
 
-Clone or download this repository, change its name to something else (like, say, `megatherium-is-awesome`), and then you'll need to do a six-step find and replace on the name in all the templates.
-
-1. Search for `'_s'` (inside single quotations) to capture the text domain and replace with: `'megatherium-is-awesome'`.
-2. Search for `_s_` to capture all the functions names and replace with: `megatherium_is_awesome_`.
-3. Search for `Text Domain: _s` in `style.css` and replace with: `Text Domain: megatherium-is-awesome`.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks and replace with: <code>&nbsp;Megatherium_is_Awesome</code>.
-5. Search for `_s-` to capture prefixed handles and replace with: `megatherium-is-awesome-`.
-6. Search for `_S_` (in uppercase) to capture constants and replace with: `MEGATHERIUM_IS_AWESOME_`.
-
-Then, update the stylesheet header in `style.css`, the links in `footer.php` with your own information and rename `_s.pot` from `languages` folder to use the theme's slug. Next, update or delete this readme.
-
-### Setup
-
-To start using all the tools that come with `_s`  you need to install the necessary Node.js and Composer dependencies :
-
-```sh
-$ composer install
-$ npm install
+```
+cd content/themes/THEMENAME
+npm install
 ```
 
-### Available CLI commands
+To build the theme (e.g. upon deployment):
 
-`_s` comes packed with CLI commands tailored for WordPress theme development :
+`gulp build`
 
-- `composer lint:wpcs` : checks all PHP files against [PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
-- `composer lint:php` : checks all PHP files for syntax errors.
-- `composer make-pot` : generates a .pot file in the `languages/` directory.
-- `npm run compile:css` : compiles SASS files to css.
-- `npm run compile:rtl` : generates an RTL stylesheet.
-- `npm run watch` : watches all SASS files and recompiles them to css when they change.
-- `npm run lint:scss` : checks all SASS files against [CSS Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/).
-- `npm run lint:js` : checks all JavaScript files against [JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/).
-- `npm run bundle` : generates a .zip archive for distribution, excluding development and system files.
+To build & watch (e.g. for development):
 
-Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
+`gulp`
 
-Good luck!
+To build the theme with RTL support (e.g. upon deployment):
+
+`gulp build-rtl`
+
+To build & watch with RTL support (e.g. for development):
+
+`gulp start-rtl`
