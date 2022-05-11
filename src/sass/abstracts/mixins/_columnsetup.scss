@@ -1,0 +1,69 @@
+@use "sass:math";
+
+@mixin margin-setup($colbreak, $from: null, $subcol: false) {
+
+    // Vertical alignments: default full height.
+    &.top {
+        align-items: flex-start;
+    }
+
+    &.middle {
+        align-items: center;
+    }
+
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    .col,
+    .col-x2 {
+        @if 1 !=$colbreak {
+
+            &:nth-of-type(#{$from}n),
+            &:nth-of-type(#{$from}n+1) {
+                margin-right: $columns__margin;
+            }
+
+            &:nth-of-type(#{$colbreak}n),
+            &:nth-of-type(#{$colbreak}) {
+                margin-right: 0;
+            }
+        }
+    }
+
+    @if($subcol) {
+        .subcol {
+            @if 1 !=$colbreak {
+
+                &:nth-of-type(#{$from}n),
+                &:nth-of-type(#{$from}n+1) {
+                    margin-right: $columns__margin;
+                }
+
+                &:nth-of-type(#{$colbreak}n),
+                &:nth-of-type(#{$colbreak}) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Mixin to generate the columns
+ * $col = number of column units that this column element will occupy
+ * $sum = total number of column units the row will be split into
+ * $numberofcolumns = actual total number of column elements that will occupy this row
+ *
+ * Example: Row split into 2 column units occupied by 2 column elements of equal width.
+ *  Both column elements: col(1, 2, 2);
+ * Example: Row split into 3 column units occupied by 2 column elements, one width = 1 third, the other width = 2 thirds.
+ *  Column element 1: col(1, 3, 2);
+ *  Column element 2: col(2, 3, 2);
+ * Example: Row split into 4 column units occupied by 2 column elements, one width = 1 quarter, the other width = 3 quarters.
+ *  Column element 1: col(1, 4, 2);
+ *  Column element 2: col(3, 4, 2);
+ */
+@mixin col($col, $sum, $numberofcolumns: 0) {
+    flex-basis: percentage(math.div($col, $sum)) - math.div($columns__margin * ($numberofcolumns - 1), $numberofcolumns);
+}

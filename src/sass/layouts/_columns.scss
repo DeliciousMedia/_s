@@ -1,0 +1,137 @@
+// Styles for all rows.
+.colrow,
+.subcolrow {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+// Styles for all columns.
+.col,
+.col-x2,
+.subcol {
+    flex-basis: 100%;
+}
+
+// Styles for rows with 1 - 6 equal width columns.
+$grid_cols: 6;
+
+@for $i from 1 through $grid_cols {
+    .cols-#{$i} {
+        @include respond-bigger($breakpoint__medium) {
+            // 2 columns medium, 4 large.
+            @if $i == 4 {
+                &:not(.subcolrow) {
+                    @include margin-setup(2);
+                }
+
+                &.subcolrow {
+                    @include margin-setup(2, null, true);
+                }
+
+                .col,
+                .subcol {
+                    @include col(1, 2, 2);
+                }
+            }
+            @else if $i == 6 {
+                &:not(.subcolrow) {
+                    @include margin-setup(3);
+                }
+
+                &.subcolrow {
+                    @include margin-setup(3, null, true);
+                }
+
+                .col,
+                .subcol {
+                    @include col(1, 3, 3);
+                }
+            }
+            @else {
+                &:not(.subcolrow) {
+                    @include margin-setup($i);
+                }
+
+                &.subcolrow {
+                    @include margin-setup($i, null, true);
+                }
+
+                .col,
+                .subcol {
+                    @include col(1, $i, $i);
+                }
+            }
+        }
+
+        @include respond-bigger($breakpoint__large) {
+            // 2 columns medium, 4 large.
+            @if $i == 4 {
+                &:not(.subcolrow) {
+                   @include margin-setup(4, 2);
+                }
+
+                &.subcolrow {
+                    @include margin-setup(4, 2, true);
+                }
+
+                .col,
+                .subcol {
+                    @include col(1, $i, $i);
+                }
+            }
+            @else if $i == 6 {
+                &:not(.subcolrow) {
+                   @include margin-setup(6, 3);
+                }
+
+                &.subcolrow {
+                    @include margin-setup(6, 3, true);
+                }
+
+                .col,
+                .subcol {
+                    @include col(1, $i, $i);
+                }
+            }
+        }
+    }
+}
+
+// Styles for row with 3 column units, 2 columns.
+.cols-3-2 {
+    @include respond-bigger($breakpoint__medium) {
+        @include margin-setup(2);
+
+        .col,
+        .subcol {
+            @include col(1, 3, 2);
+        }
+
+        .col-x2,
+        .subcol-x2 {
+            @include col(2, 3, 2);
+        }
+    }
+}
+
+
+// Styles for row with 2 columns on small and 4 columns on large
+.cols-2-4 {
+    @include margin-setup(2);
+
+    .col,
+    .subcol {
+        @include col(1, 2, 2);
+    }
+    @include respond-bigger($breakpoint__medium) {
+        @include margin-setup(4, 2);
+
+        .col,
+        .subcol {
+            @include col(1, 4, 4);
+        }
+    }
+}
+
+

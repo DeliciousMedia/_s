@@ -10,5 +10,9 @@ textarea {
 	line-height: $font__line-height-body;
 }
 
+.darkbg {
+    @include darkbg;
+}
+
 @import "headings";
 @import "copy";

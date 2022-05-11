@@ -1,0 +1,10 @@
+.boxed {
+    margin: 0 auto;
+    width: 90%;
+    max-width: $desktop__max-width;
+    padding: $margin__xxs 0;
+
+    @include respond-bigger($breakpoint__medium) {
+        padding: $margin__xs 0;
+    }
+}

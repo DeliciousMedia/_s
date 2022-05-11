@@ -1,0 +1,78 @@
+/**
+ * Mixin to generate the buttons.
+ */
+@mixin buttons {
+    text-decoration: none;
+    border-radius: $border__radius;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $margin__xxs $margin__xs;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+@mixin button-colors($whichcolor: primary) {
+    color: #fff;
+
+    @if primary == $whichcolor {
+        background-color: $color__primary;
+        border: 2px solid $color__primary;
+
+        &:visited {
+            color: #fff;
+
+            &:hover {
+                color: $color__primary;
+                background-color: #fff;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: $color__primary;
+            background-color: #fff;
+        }
+
+        &:not(a):focus {
+            border-radius: $border__radius;
+            outline: 1px dotted $color__primary;
+            outline-offset: 2px;
+        }
+
+    }  @else if secondary == $whichcolor {
+        background-color: $color__secondary;
+        border: 2px solid $color__secondary;
+
+        &:visited {
+            color: #fff;
+
+            &:hover {
+                color: $color__secondary;
+                background-color: #fff;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active
+        &:visited {
+            color: $color__secondary;
+            background-color: #fff;
+        }
+
+        &:not(a):focus {
+            border-radius: $border__radius;
+            outline: 1px dotted $color__secondary;
+            outline-offset: 2px;
+        }
+    }
+
+    &:disabled,
+    [disabled='true'] {
+        color: $color__text-main;
+        background-color: #c0c0c0;
+        border-color: #c0c0c0;
+    }
+}

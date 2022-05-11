@@ -1,0 +1,44 @@
+//Mixin for handling dark backgrounds so we have light text on top.
+@mixin darkbg {
+    color: #fff;
+
+    a {
+        @include links("darkbg");
+    }
+}
+
+//Mixin to handle links on dark or light backgrounds.
+@mixin links($light-or-dark-background) {
+    $link: $color__link;
+    $visited: $color__link-visited;
+    $hover: $color__link-hover;
+    $focus: #000;
+
+    @if "darkbg" == $light-or-dark-background {
+        $link: $color__link-light;
+        $visited: $color__link-light-visited;
+        $hover: $color__link-light-hover;
+        $focus: #fff;
+    }
+
+    color: $link;
+
+    &:visited {
+        color: $visited;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $hover;
+    }
+
+    &:focus {
+        outline: 1px dashed $focus;
+    }
+
+    &:hover,
+    &:active {
+        outline: 0;
+    }
+}
